@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreInjection.TypedFactories.Test", "AspNetCoreInjection.TypedFactories.Test\AspNetCoreInjection.TypedFactories.Test.csproj", "{63C57C51-86E2-46D7-9244-AE197674C0CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D8DF6CF4-9079-4472-93E4-B6A2B751CB63}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreInjection.TypedFactories", "AspNetCoreInjection.TypedFactories\AspNetCoreInjection.TypedFactories.csproj", "{ADE689B6-E469-41E3-8F13-A458DBFDE086}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63C57C51-86E2-46D7-9244-AE197674C0CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63C57C51-86E2-46D7-9244-AE197674C0CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63C57C51-86E2-46D7-9244-AE197674C0CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63C57C51-86E2-46D7-9244-AE197674C0CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADE689B6-E469-41E3-8F13-A458DBFDE086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADE689B6-E469-41E3-8F13-A458DBFDE086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADE689B6-E469-41E3-8F13-A458DBFDE086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADE689B6-E469-41E3-8F13-A458DBFDE086}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F4D3873-EFB2-49FF-BE42-B7149A1637D7}
+	EndGlobalSection
+EndGlobal

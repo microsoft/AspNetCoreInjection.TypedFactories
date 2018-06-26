@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>AspNetCoreInjection.TypedFactories</AssemblyName>
+    <RootNamespace>AspNetCoreInjection.TypedFactories</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Alon Catz</Authors>
+    <Company />
+    <Description>Automatic Factory functionality similar to Castle.Windsor Typed Factories, for the default IoC container in ASP.NET Core (ServiceCollection)</Description>
+    <PackageProjectUrl>https://github.com/olegoga/AspNetCoreInjection.TypedFactories</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/olegoga/AspNetCoreInjection.TypedFactories</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Version>1.1.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="4.3.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" />
+  </ItemGroup>
+
+</Project>
