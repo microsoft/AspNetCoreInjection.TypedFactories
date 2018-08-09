@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <AssemblyName>AspNetCoreInjection.TypedFactories</AssemblyName>
     <RootNamespace>AspNetCoreInjection.TypedFactories</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/olegoga/AspNetCoreInjection.TypedFactories</PackageProjectUrl>
     <RepositoryUrl>https://github.com/olegoga/AspNetCoreInjection.TypedFactories</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
