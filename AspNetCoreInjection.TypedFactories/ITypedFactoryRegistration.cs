@@ -8,15 +8,6 @@ namespace AspNetCoreInjection.TypedFactories
     /// </summary>
     public interface ITypedFactoryRegistration
     {
-        IServiceCollection Container { get; }
-
-        /// <summary>
-        /// Defines the concrete type which the factory will create.
-        /// </summary>
-        /// <param name="toType">
-        /// The concrete type which the factory will instantiate.
-        /// </param>
-        void ForConcreteType(Type toType);
 
         /// <summary>
         /// Defines the concrete type which the factory will create.
