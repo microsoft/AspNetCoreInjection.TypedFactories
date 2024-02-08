@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace AspNetCoreInjection.TypedFactories
 {
-    internal class TypedFactoryFlavor : ITypedFactoryFlavor
+    internal class TypedFactoryFlavor<TFactory> : ITypedFactoryFlavor where TFactory : class
     {
-        private TypedFactoryRegistration typedFactoryRegistration;
-        private Dictionary<Type, Type> flavorMap = new Dictionary<Type, Type>();
+        private readonly TypedFactoryRegistration<TFactory> typedFactoryRegistration;
+        private readonly Dictionary<Type, Type> flavorMap = new Dictionary<Type, Type>();
 
-        public TypedFactoryFlavor(TypedFactoryRegistration typedFactoryRegistration)
+        public TypedFactoryFlavor(TypedFactoryRegistration<TFactory> typedFactoryRegistration)
         {
             this.typedFactoryRegistration = typedFactoryRegistration;
         }

@@ -1,6 +1,5 @@
 namespace AspNetCoreInjection.TypedFactories
 {
-    using Castle.DynamicProxy;
     using System;
     using System.Collections.Generic;
     using System.Reflection;
@@ -9,23 +8,39 @@ namespace AspNetCoreInjection.TypedFactories
     /// Defines an <see cref="IInterceptor"/> implementation which implements the factory methods, 
     /// by passing the method arguments by name into a specified concrete type's constructor.
     /// </summary>
-    internal class FactoryInterceptor : IInterceptor
+    public class FactoryInterceptor : DispatchProxy /// it has to be public because of this issue https://github.com/dotnet/corefx/issues/28403
     {
-        private readonly IServiceProvider container;
-        Dictionary<Type, Resolver> resolversMap = new Dictionary<Type, Resolver>();
+
+        private IServiceProvider container;
+
+        private readonly Dictionary<Type, Resolver> resolversMap = new Dictionary<Type, Resolver>();
         private Resolver singleResolver;
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="FactoryInterceptor"/> class.
-        /// </summary>
-        public FactoryInterceptor(IServiceProvider container)
+        private IServiceProvider Container
         {
-            if (container == null)
+            get
             {
-                throw new ArgumentNullException("container");
+                if (container == null)
+                {
+                    throw new Exception($"Class not properly initialized, call '{nameof(Initialize)}' method first");
+                }
+                return container;
             }
+        }
 
-            this.container = container;
+        /// <summary>
+        /// Required by DispatchProxy
+        /// </summary>
+        public FactoryInterceptor()
+        {
+
+        }
+        /// <summary>
+        ///     Initializes instance of the <see cref="FactoryInterceptor"/> class.
+        /// </summary>
+        public void Initialize(IServiceProvider container)
+        {
+            this.container = container ?? throw new ArgumentNullException("container");
         }
 
         /// <summary>
@@ -45,7 +60,7 @@ namespace AspNetCoreInjection.TypedFactories
                 throw new Exception("To is expected to be concrete class");
             }
 
-            this.resolversMap.Add(from, new Resolver(to, container));
+            this.resolversMap.Add(from, new Resolver(to, Container));
         }
 
         /// <summary>
@@ -59,17 +74,11 @@ namespace AspNetCoreInjection.TypedFactories
                 throw new Exception("To is expected to be concrete class");
             }
 
-            this.singleResolver = new Resolver(to, container);
+            this.singleResolver = new Resolver(to, Container);
         }
-
-        public void Intercept(IInvocation invocation)
+        protected override object Invoke(MethodInfo targetMethod, object[] args)
         {
-            if (invocation.Method == null)
-            {
-                throw new ArgumentNullException("invocation.Method");
-            }
-
-            invocation.ReturnValue = GetResolver(invocation.Method).ResolveWithArguments(invocation.Method, invocation.Arguments);
+            return GetResolver(targetMethod).ResolveWithArguments(targetMethod, args);
         }
 
         public void VerifyFactorySignature(MethodInfo factoryMethod)
@@ -83,7 +92,7 @@ namespace AspNetCoreInjection.TypedFactories
         /// </summary>
         private Resolver GetResolver(MethodInfo factoryMethod)
         {
-            Resolver resolver = null;
+            Resolver resolver;
             if (singleResolver != null)
             {
                 resolver = singleResolver;
@@ -92,8 +101,7 @@ namespace AspNetCoreInjection.TypedFactories
             {
                 if (!this.resolversMap.TryGetValue(factoryMethod.ReturnType, out resolver))
                 {
-                    var methodName = $"{factoryMethod.ReflectedType.FullName}::{ factoryMethod.Name}";
-                    throw new Exception($"Factory method {methodName} returns interface {factoryMethod.ReturnType.FullName} which doesn't have a registered flavor.");
+                    throw new Exception($"Factory method {factoryMethod.FullName()} returns interface {factoryMethod.ReturnType.FullName} which doesn't have a registered flavor.");
                 }
             }
 
